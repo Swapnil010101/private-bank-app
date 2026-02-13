@@ -4,18 +4,15 @@ import com.bank.repository.AccountRepository;
 import com.bank.service.BankService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class BankServiceTest {
-
     private BankService bankService;
 
     @BeforeEach
     void setup() {
         AccountRepository repository = new AccountRepository();
         bankService = new BankService(repository);
-
         bankService.createAccount("101", "John", 1000);
         bankService.createAccount("102", "Alice", 2000);
     }
@@ -34,8 +31,7 @@ class BankServiceTest {
 
     @Test
     void testInsufficientBalance() {
-        assertThrows(IllegalStateException.class,
-                () -> bankService.withdraw("101", 5000));
+        assertThrows(IllegalStateException.class, () -> bankService.withdraw("101", 5000));
     }
 
     @Test
@@ -47,7 +43,6 @@ class BankServiceTest {
 
     @Test
     void testTransferToSameAccount() {
-        assertThrows(IllegalArgumentException.class,
-                () -> bankService.transfer("101", "101", 100));
+        assertThrows(IllegalArgumentException.class, () -> bankService.transfer("101", "101", 100));
     }
 }

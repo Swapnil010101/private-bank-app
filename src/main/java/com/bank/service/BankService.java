@@ -4,7 +4,6 @@ import com.bank.model.Account;
 import com.bank.repository.AccountRepository;
 
 public class BankService {
-
     private AccountRepository repository;
 
     public BankService(AccountRepository repository) {
@@ -27,12 +26,9 @@ public class BankService {
     }
 
     public void transfer(String from, String to, double amount) {
-        if (from.equals(to))
-            throw new IllegalArgumentException("Cannot transfer to same account");
-
+        if (from.equals(to)) throw new IllegalArgumentException("Cannot transfer to same account");
         Account sender = repository.findById(from);
         Account receiver = repository.findById(to);
-
         sender.withdraw(amount);
         receiver.deposit(amount);
     }

@@ -1,0 +1,21 @@
+package com.bank.app;
+
+import com.bank.repository.AccountRepository;
+import com.bank.service.BankService;
+
+public class MainApp {
+    public static void main(String[] args) {
+        AccountRepository repo = new AccountRepository();
+        BankService bank = new BankService(repo);
+
+        bank.createAccount("101", "John", 1000);
+        bank.createAccount("102", "Alice", 2000);
+
+        bank.deposit("101", 500);
+        bank.withdraw("102", 300);
+        bank.transfer("101", "102", 200);
+
+        System.out.println("Balance of 101: " + bank.checkBalance("101"));
+        System.out.println("Balance of 102: " + bank.checkBalance("102"));
+    }
+}
